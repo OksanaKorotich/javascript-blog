@@ -1,13 +1,23 @@
+
 'use strict';
 function titleClickHandler(event){
     console.log('Link was clicked!');
-    console.log(event);
+
+  /* (done) remove class 'active' from all article links  */
+  const activeLinks = document.querySelectorAll('.titles a.active');
+
+  for(let activeLink of activeLinks){
+    activeLink.classList.remove('active');
   }
-    /* remove class 'active' from all article links  */
 
   /* add class 'active' to the clicked link */
 
-  /* remove class 'active' from all articles */
+  /* (done) remove class 'active' from all articles */
+  const activeArticles = document.querySelectorAll('article.post');
+
+  for(let activeArticle of activeArticles){
+    activeArticle.classList.remove('active');
+  }
 
   /* get 'href' attribute from the clicked link */
 
@@ -15,10 +25,11 @@ function titleClickHandler(event){
 
   /* add class 'active' to the correct article */
 
+  }
+
   const links = document.querySelectorAll('.titles a');
 
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
 
   }
-
