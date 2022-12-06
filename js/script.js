@@ -31,7 +31,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post-author';
+  optArticleAuthorSelector = '.post-author',
+  optTagsListSelector = '.tags.list';
 
 function generateTitleLinks(customSelector = ''){
   //remove contents of titleList
@@ -56,12 +57,14 @@ function generateTitleLinks(customSelector = ''){
 generateTitleLinks();
 
 function generateTags(){
+  //створюємо об'єкт
+  let allTags = {};
   //find all articles
   const allArticles = document.querySelectorAll(optArticleSelector);
   /* START LOOP: for every article: */
   for(let article of allArticles){
     /* find tags wrapper */
-    const tagList = article.querySelector(optArticleTagsSelector);
+    const htmlList = article.querySelector(optArticleTagsSelector);
     /* make html variable with empty string */
     let html = '';
     /* get tags from data-tags attribute */
@@ -74,13 +77,22 @@ function generateTags(){
       const htmlTag = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
       /* add generated code to html variable */
       html = html + htmlTag;
+      if(!allTags.hasOwnProperty(tag)){
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
+
     }
-    console.log(html);
+    console.log('aaaaaaa'. allTags)
     /* END LOOP: for each tag */
     /* insert HTML of all the links into the tags wrapper */
-    tagList.innerHTML = html;
+    htmlList.innerHTML = html;
     /* END LOOP: for every article: */
   }
+  const tagList = document.querySelector(optTagsListSelector);
+  //tagList.innerHTML = allTags.join(' ');
+  console.log('what we have', tagList.innerHTML);
 }
 
 addClickListenersToTags();
